@@ -55,12 +55,6 @@
       state: reloaded
       daemon_reload: yes
 
-
-- name: Ensure app multi-stage system is working
-  hosts: docker
-  become: yes
-  
-  tasks:
   - name: Ensure git package is present
     apt:
       name: git
@@ -74,3 +68,9 @@
       dest: /tmp/java_app
       force: yes
       repo: https://github.com/slayhammer/study_ansible_1.git
+
+  - name: Ensure app built and running
+    docker_compose:
+      project_src: /tmp/java_app/study_ansible_1/java_app_dockerd
+      build: yes
+      state: present
