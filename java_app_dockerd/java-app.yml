@@ -4,6 +4,11 @@
   become: yes
   
   tasks:
+  - name: Ensure a directory for an apt key exists
+    file:
+      path: /etc/apt/keyrings/
+      state: directory
+
   - name: Ensure an apt key for docker rep is present
     apt_key:
       url: https://download.docker.com/linux/ubuntu/gpg
