@@ -38,6 +38,11 @@
       autoclean: yes
       autoremove: yes
   
+  - name: Ensure Docker SDK for Python is present
+    pip:
+      name: docker
+      state: present
+      
   - name: Ensure docker-compose executable is present
     get_url:
       url: https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-linux-x86_64
