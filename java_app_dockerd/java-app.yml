@@ -1,0 +1,16 @@
+---
+- name: Ensure docker emvironment is set up and running
+  hosts: docker
+  become: yes
+  
+  tasks:
+  - name: Ensure an apt key for docker rep is present
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      keyring: /etc/apt/keyrings/docker.gpg
+  
+  - name: Ensure a docker repository is in reps list
+    apt_repository:
+      repo: deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+      state: present
+      filename: docker
