@@ -47,5 +47,5 @@
   
   - name: Ensure tomcat is running
     service:
-      name: tomcat
+      name: tomcat9
       state: started
