@@ -43,13 +43,24 @@
       autoclean: yes
       autoremove: yes
 
-  - name: Ensure pip2 source is present
+  - name: Ensure python2/setuptools source is present
+    unarchive:
+      remote_src: yes
+      src: https://files.pythonhosted.org/packages/b2/40/4e00501c204b457f10fe410da0c97537214b2265247bc9a5bc6edd55b9e4/setuptools-44.1.1.zip
+      dest: /tmp
+
+  - name: Ensure python2/setuptools is installed (imperative)
+    shell:
+      chdir: /tmp/setuptools-44.1.1
+      cmd: python setup.py install
+
+  - name: Ensure python2/pip2 source is present
     unarchive:
       remote_src: yes
       src: https://files.pythonhosted.org/packages/53/7f/55721ad0501a9076dbc354cc8c63ffc2d6f1ef360f49ad0fbcce19d68538/pip-20.3.4.tar.gz
       dest: /tmp
 
-  - name: Ensure pip2 is installed (imperative)
+  - name: Ensure python2/pip2 is installed (imperative)
     shell:
       chdir: /tmp/pip-20.3.4
       cmd: python setup.py install
