@@ -38,9 +38,14 @@
       autoclean: yes
       autoremove: yes
       
-  - name: Ensure Docker SDK for Python is present
+  - name: Ensure Docker SDK for Python (as docker) is present
     pip:
       name: docker
+      state: present
+ 
+  - name: Ensure Docker SDK for Python (as docker-py) is present
+    pip:
+      name: docker-py
       state: present
       
   - name: Ensure docker-compose for Python is present
