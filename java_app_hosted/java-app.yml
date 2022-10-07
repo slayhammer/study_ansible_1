@@ -32,6 +32,11 @@
       path: /tmp/onlineshop-war/target/onlineshop.war
       state: file
 
+  - name: Fetch the app package
+    fetch:
+      src: /tmp/onlineshop-war/target/onlineshop.war
+      dest: /tmp/onlineshop.war
+
 - name: Run an java app
   hosts: prod
   become: yes
@@ -49,3 +54,9 @@
     service:
       name: tomcat9
       state: started
+  
+  - name: Ensure the app package is installed
+    copy:
+      src: /tmp/onlineshop.war
+      dest: /"{{ ansible_env.CATALINA_BASE }}"/webapps/onlineshop.war
+      
