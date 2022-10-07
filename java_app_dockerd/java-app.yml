@@ -43,3 +43,34 @@
       url: https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-linux-x86_64
       dest: /bin/docker-compose
       mode: +x
+  
+  - name: Ensure docker daemon is set up properly (stage 1)
+    copy:
+      src: docker_override.conf
+      dst: /etc/systemd/system/docker.service.d/override.conf
+
+  - name: Ensure docker daemon is set up properly (stage 2)
+    systemd:
+      name: docker
+      state: reloaded
+      daemon_reload: yes
+
+
+- name: Ensure app multi-stage system is working
+  hosts: docker
+  become: yes
+  
+  tasks:
+  - name: Ensure git package is present
+    apt:
+      name: git
+      state: present
+      update_cache: yes
+      autoclean: yes
+      autoremove: yes
+
+  - name: Ensure app repository is up to date
+    git:
+      dest: /tmp/java_app
+      force: yes
+      repo: https://github.com/slayhammer/study_ansible_1.git

@@ -38,6 +38,7 @@
       dest: /tmp/onlineshop.war
       flat: yes
 
+
 - name: Run an java app
   hosts: prod
   become: yes
