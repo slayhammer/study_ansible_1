@@ -36,6 +36,7 @@
     fetch:
       src: /tmp/onlineshop-war/target/onlineshop.war
       dest: /tmp/onlineshop.war
+      flat: yes
 
 - name: Run an java app
   hosts: prod
