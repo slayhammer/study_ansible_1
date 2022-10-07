@@ -35,6 +35,11 @@
     apt:
       name: containerd.io
       state: present
+
+  - name: Ensure python-pip package is present
+    apt:
+      name: python-pip
+      state: present
       autoclean: yes
       autoremove: yes
   
