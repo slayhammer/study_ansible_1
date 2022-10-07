@@ -29,5 +29,5 @@
   
   - name: Ensure app package is built
     file:
-      path: /tmp/onlineshop-war/target/onlineshop-war.war
+      path: /tmp/onlineshop-war/target/onlineshop.war
       state: file
