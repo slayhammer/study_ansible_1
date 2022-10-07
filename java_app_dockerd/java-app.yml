@@ -35,6 +35,11 @@
     apt:
       name: containerd.io
       state: present
+
+  - name: Ensure docker-python package is present
+    apt:
+      name: docker-python
+      state: present
       autoclean: yes
       autoremove: yes
 
@@ -62,11 +67,6 @@
       cmd: python setup.py install
       creates: /usr/local/lib/python2.7/dist-packages/pip-20.3.4-py2.7.egg/EGG-INFO/PKG-INFO
       
- # - name: Ensure Docker SDK for Python (as docker) is present
- #   pip:
- #     name: docker
- #     state: present
- 
   - name: Ensure docker-compose for Python is present
     pip:
       name: docker-compose
@@ -104,6 +104,6 @@
 
   - name: Ensure app built and running
     docker_service:
-      project_src: /tmp/java_app/study_docker_1/compose_java_app
+      project_src: /tmp/java_app/compose_java_app
       build: yes
       state: present
