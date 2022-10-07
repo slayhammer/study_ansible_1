@@ -63,14 +63,14 @@
       autoclean: yes
       autoremove: yes
 
-  - name: Ensure app repository is up to date
+  - name: Ensure app compose repository is up to date
     git:
       dest: /tmp/java_app
       force: yes
-      repo: https://github.com/slayhammer/study_ansible_1.git
+      repo: https://github.com/slayhammer/study_docker_1.git
 
   - name: Ensure app built and running
     docker_compose:
-      project_src: /tmp/java_app/study_ansible_1/java_app_dockerd
+      project_src: /tmp/java_app/study_docker_1/compose_java_app
       build: yes
       state: present
