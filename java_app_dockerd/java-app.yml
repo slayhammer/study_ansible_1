@@ -48,6 +48,7 @@
     shell:
       chdir: /tmp/setuptools-44.1.1
       cmd: python setup.py install
+      creates: /usr/local/lib/python2.7/dist-packages/setuptools-44.1.1-py2.7.egg
 
   - name: Ensure python2/pip2 source is present
     unarchive:
@@ -59,10 +60,11 @@
     shell:
       chdir: /tmp/pip-20.3.4
       cmd: python setup.py install
+      creates: /usr/local/lib/python2.7/dist-packages/pip-20.3.4-py2.7.egg/EGG-INFO/PKG-INFO
       
-  - name: Ensure Docker SDK for Python (as docker-py) is present
+  - name: Ensure Docker SDK for Python (as docker) is present
     pip:
-      name: docker-py
+      name: docker
       state: present
  
   - name: Ensure docker-compose for Python is present
