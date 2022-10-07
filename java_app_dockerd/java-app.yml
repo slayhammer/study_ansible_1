@@ -36,9 +36,9 @@
       name: containerd.io
       state: present
 
-  - name: Ensure docker-python package is present
+  - name: Ensure python-docker package is present
     apt:
-      name: docker-python
+      name: python-docker
       state: present
       autoclean: yes
       autoremove: yes
