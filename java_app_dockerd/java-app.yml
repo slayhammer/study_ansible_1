@@ -45,7 +45,7 @@
   
   - name: Ensure Docker SDK for Python is present
     pip:
-      name: docker
+      name: docker-py
       state: present
       
   - name: Ensure docker-compose executable is present
