@@ -1,0 +1,34 @@
+---
+- name: Building an java app
+  hosts: setup
+  become: yes
+  
+  tasks:
+  - name: Ensure git package is present
+    apt:
+      name: git
+      state: present
+  
+  - name: Ensure maven package is present
+    apt:
+      name: maven
+      state: present
+  
+  - name: Ensure apt cache is clean
+    apt:
+      clean: yes
+  
+  - name: Ensure app repository is up to date
+    git:
+      dest: /tmp/onlineshop-war
+      force: yes
+      repo: https://github.com/ashburnere/onlineshop-war.git
+  
+  - name: Build app package (imperative)
+    shell:
+      cmd: mvn package -f /tmp/onlineshop-war
+  
+  - name: Ensure app package is built
+    file:
+      path: /tmp/onlineshop-war/target/onlineshop-war.war
+      state: file
