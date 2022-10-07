@@ -62,10 +62,10 @@
       cmd: python setup.py install
       creates: /usr/local/lib/python2.7/dist-packages/pip-20.3.4-py2.7.egg/EGG-INFO/PKG-INFO
       
-  - name: Ensure Docker SDK for Python (as docker) is present
-    pip:
-      name: docker
-      state: present
+ # - name: Ensure Docker SDK for Python (as docker) is present
+ #   pip:
+ #     name: docker
+ #     state: present
  
   - name: Ensure docker-compose for Python is present
     pip:
