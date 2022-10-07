@@ -70,7 +70,7 @@
       repo: https://github.com/slayhammer/study_docker_1.git
 
   - name: Ensure app built and running
-    docker_compose:
+    docker_service:
       project_src: /tmp/java_app/study_docker_1/compose_java_app
       build: yes
       state: present
