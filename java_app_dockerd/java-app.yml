@@ -47,7 +47,7 @@
   - name: Ensure docker daemon is set up properly (stage 1)
     copy:
       src: docker_override.conf
-      dst: /etc/systemd/system/docker.service.d/override.conf
+      dest: /etc/systemd/system/docker.service.d/override.conf
 
   - name: Ensure docker daemon is set up properly (stage 2)
     systemd:
