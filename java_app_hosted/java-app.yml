@@ -8,15 +8,14 @@
     apt:
       name: git
       state: present
+      update_cache: yes
   
   - name: Ensure maven package is present
     apt:
       name: maven
       state: present
-  
-  - name: Ensure apt cache is clean
-    apt:
-      clean: yes
+      autoclean: yes
+      autoremove: yes
   
   - name: Ensure app repository is up to date
     git:
