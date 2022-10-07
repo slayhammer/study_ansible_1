@@ -31,3 +31,21 @@
     file:
       path: /tmp/onlineshop-war/target/onlineshop.war
       state: file
+
+- name: Run an java app
+  hosts: prod
+  become: yes
+
+  tasks:
+  - name: Ensure tomcat package is present
+    apt:
+      name: tomcat9
+      state: present
+      update_cache: yes
+      autoclean: yes
+      autoremove: yes
+  
+  - name: Ensure tomcat is running
+    service:
+      name: tomcat
+      state: started
