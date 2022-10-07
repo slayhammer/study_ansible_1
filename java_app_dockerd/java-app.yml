@@ -72,22 +72,6 @@
       name: docker-compose
       state: present
   
-  - name: Ensure docker daemon is set up properly (stage 1)
-    file:
-      path: /etc/systemd/system/docker.service.d
-      state: directory
-
-  - name: Ensure docker daemon is set up properly (stage 2)
-    copy:
-      src: docker_override.conf
-      dest: /etc/systemd/system/docker.service.d/override.conf
-
-  - name: Ensure docker daemon is set up properly (stage 3)
-    systemd:
-      name: docker
-      state: reloaded
-      daemon_reload: yes
-
   - name: Ensure git package is present
     apt:
       name: git
