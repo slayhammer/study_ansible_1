@@ -24,16 +24,16 @@
         repo: "{{ c_app_repo }}"
       notify: Build app package (imperative)
 
+    - name: Build app package (imperative)
+      shell:
+        cmd: "mvn package -q -f {{ c_build_path }}/"
+
     - name: Fetch the app package
       synchronize:
         src: "{{ c_build_path }}/target/{{ c_app_name }}"
         dest: "{{ c_temp_dir }}/{{ c_app_name }}"
         mode: pull
 
-  handlers:
-    - name: Build app package (imperative)
-      shell:
-        cmd: "mvn package -q -f {{ c_build_path }}/"
 
 - name: Run an java app
   hosts: prod
