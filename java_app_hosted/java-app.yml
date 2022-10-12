@@ -1,5 +1,6 @@
 ---
-- vars:
+- hosts: all
+  vars:
     c_app_repo: https://github.com/ashburnere/onlineshop-war.git
     c_build_path: /tmp/onlineshop-war
     c_tomcat_webapps: /var/lib/tomcat9/webapps
