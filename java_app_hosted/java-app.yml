@@ -33,7 +33,7 @@
   handlers:
     - name: Build app package (imperative)
       shell:
-        cmd: "mvn package -f {{ c_build_path }}"
+        cmd: "mvn package -q -f {{ c_build_path }}/"
 
 - name: Run an java app
   hosts: prod
