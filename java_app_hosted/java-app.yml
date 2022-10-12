@@ -1,10 +1,10 @@
 ---
 - vars:
-    c-app-repo: https://github.com/ashburnere/onlineshop-war.git
-    c-build-path: /tmp/onlineshop-war
-    c-tomcat-webapps: /var/lib/tomcat9/webapps
-    c-temp-dir: /tmp
-    c-app-name: onlineshop.war
+    c_app_repo: https://github.com/ashburnere/onlineshop-war.git
+    c_build_path: /tmp/onlineshop-war
+    c_tomcat_webapps: /var/lib/tomcat9/webapps
+    c_temp_dir: /tmp
+    c_app_name: onlineshop.war
 
 
 - name: Building an java app
@@ -25,21 +25,21 @@
   
   - name: Ensure the package is built from the latest code in the repository
     git:
-      dest: "{{ c-build-path }}"
+      dest: "{{ c_build_path }}"
       force: yes
-      repo: "{{ c-app-repo }}"
+      repo: "{{ c_app_repo }}"
       notify: Build app package (imperative)
   
   - name: Fetch the app package
     synchronize:
-      src: "{{ c-build-path }}/target/{{ c-app-name }}"
-      dest: "{{ c-temp-dir }}/{{ c-app-name }}"
+      src: "{{ c_build_path }}/target/{{ c_app_name }}"
+      dest: "{{ c_temp_dir }}/{{ c_app_name }}"
       mode: pull
 
   Handlers:
     - name: Build app package (imperative)
       shell:
-        cmd: "mvn package -f {{ c-build-path }}"
+        cmd: "mvn package -f {{ c_build_path }}"
 
 - name: Run an java app
   hosts: prod
@@ -61,6 +61,6 @@
   
   - name: Ensure the app package is installed
     synchronize:
-      src: "{{ c-temp-dir }}/{{ c-app-name }}"
-      dest: "{{ c-tomcat-webapps }}/{{ c-app-name }}"
+      src: "{{ c_temp_dir }}/{{ c_app_name }}"
+      dest: "{{ c_tomcat_webapps }}/{{ c_app_name }}"
       mode: push
