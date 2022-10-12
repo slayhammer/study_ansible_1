@@ -38,7 +38,7 @@
 - name: Run an java app
   hosts: prod
   become: yes
-  var_files:
+  vars_files:
     - ./java-app-vars.yml
 
   tasks:
