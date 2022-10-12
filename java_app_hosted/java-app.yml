@@ -22,7 +22,7 @@
         dest: "{{ c_build_path }}"
         force: yes
         repo: "{{ c_app_repo }}"
-        notify: Build app package (imperative)
+      notify: Build app package (imperative)
 
     - name: Fetch the app package
       synchronize:
