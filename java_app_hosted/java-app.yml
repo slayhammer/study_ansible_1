@@ -20,7 +20,6 @@
     - name: Ensure the package is built from the latest code in the repository
       git:
         dest: "{{ c_build_path }}"
-        force: yes
         repo: "{{ c_app_repo }}"
 
     - name: Build app package (imperative)
