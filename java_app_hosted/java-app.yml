@@ -22,7 +22,6 @@
         dest: "{{ c_build_path }}"
         force: yes
         repo: "{{ c_app_repo }}"
-      notify: Build app package (imperative)
 
     - name: Build app package (imperative)
       shell:
