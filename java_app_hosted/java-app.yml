@@ -2,7 +2,7 @@
 - name: Building an java app
   hosts: setup
   become: yes
-  var_files:
+  vars_files:
     - ./java-app-vars.yml
   
   tasks:
