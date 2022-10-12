@@ -27,7 +27,7 @@
     git:
       dest: "{{ c-build-path }}"
       force: yes
-      repo: {{ c-app-repo }}
+      repo: "{{ c-app-repo }}"
       notify: Build app package (imperative)
   
   - name: Fetch the app package
@@ -39,7 +39,7 @@
   Handlers:
     - name: Build app package (imperative)
       shell:
-        cmd: mvn package -f {{ c-build-path }}
+        cmd: "mvn package -f {{ c-build-path }}"
 
 - name: Run an java app
   hosts: prod
