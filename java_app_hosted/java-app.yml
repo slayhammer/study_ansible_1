@@ -1,43 +1,45 @@
 ---
+- vars:
+    c-app-repo: https://github.com/ashburnere/onlineshop-war.git
+    c-build-path: /tmp/onlineshop-war
+    c-tomcat-webapps: /var/lib/tomcat9/webapps
+    c-temp-dir: /tmp
+    c-app-name: onlineshop.war
+
+
 - name: Building an java app
   hosts: setup
   become: yes
   
   tasks:
-  - name: Ensure git package is present
+  - name: Ensure required packages are present
     apt:
-      name: git
+      name: "{{ item }}"
       state: present
       update_cache: yes
-  
-  - name: Ensure maven package is present
-    apt:
-      name: maven
-      state: present
       autoclean: yes
       autoremove: yes
+    with_items:
+      - git
+      - maven
   
-  - name: Ensure app repository is up to date
+  - name: Ensure the package is built from the latest code in the repository
     git:
-      dest: /tmp/onlineshop-war
+      dest: "{{ c-build-path }}"
       force: yes
-      repo: https://github.com/ashburnere/onlineshop-war.git
+      repo: {{ c-app-repo }}
+      notify: Build app package (imperative)
   
-  - name: Build app package (imperative)
-    shell:
-      cmd: mvn package -f /tmp/onlineshop-war
-  
-  - name: Ensure app package is built
-    file:
-      path: /tmp/onlineshop-war/target/onlineshop.war
-      state: file
-
   - name: Fetch the app package
-    fetch:
-      src: /tmp/onlineshop-war/target/onlineshop.war
-      dest: /tmp/onlineshop.war
-      flat: yes
+    synchronize:
+      src: "{{ c-build-path }}/target/{{ c-app-name }}"
+      dest: "{{ c-temp-dir }}/{{ c-app-name }}"
+      mode: pull
 
+  Handlers:
+    - name: Build app package (imperative)
+      shell:
+        cmd: mvn package -f {{ c-build-path }}
 
 - name: Run an java app
   hosts: prod
@@ -58,7 +60,7 @@
       state: started
   
   - name: Ensure the app package is installed
-    copy:
-      src: /tmp/onlineshop.war
-      dest: /var/lib/tomcat9/webapps/onlineshop.war
-      
+    synchronize:
+      src: "{{ c-temp-dir }}/{{ c-app-name }}"
+      dest: "{{ c-tomcat-webapps }}/{{ c-app-name }}"
+      mode: push
