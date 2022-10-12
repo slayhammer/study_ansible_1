@@ -1,16 +1,9 @@
 ---
-- hosts: all
-  vars:
-    c_app_repo: https://github.com/ashburnere/onlineshop-war.git
-    c_build_path: /tmp/onlineshop-war
-    c_tomcat_webapps: /var/lib/tomcat9/webapps
-    c_temp_dir: /tmp
-    c_app_name: onlineshop.war
-
-
 - name: Building an java app
   hosts: setup
   become: yes
+  var_files:
+    - ./java-app-vars.yml
   
   tasks:
     - name: Ensure required packages are present
@@ -45,6 +38,8 @@
 - name: Run an java app
   hosts: prod
   become: yes
+  var_files:
+    - ./java-app-vars.yml
 
   tasks:
   - name: Ensure tomcat package is present
