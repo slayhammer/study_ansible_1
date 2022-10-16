@@ -20,7 +20,7 @@
     recreate: yes
     force_kill: yes
     exposed_ports:
-      - 8080
+      - "{{ c_tomcat_port }}"
     volumes:
       - "{{ c_temp_dir }}:{{ c_tomcat_base }}/webapps:rw"
   notify: Fetch the app package

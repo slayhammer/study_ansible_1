@@ -1,2 +1,3 @@
 ---
 c_tomcat_base: /var/lib/tomcat9
+c_tomcat_port: 8081
