@@ -21,3 +21,6 @@ RUN git clone {{ c_app_repo }} {{ c_build_path }}
 
 # Building the app
 RUN mvn package -f {{ c_build_path }}
+
+# Set up volume
+VOLUME {{ c_build_path }}/target
