@@ -30,6 +30,7 @@
     state: started
     recreate: yes
     force_kill: yes
+    init: yes
     mounts:
       - target: "{{ c_build_path }}/target"
         source: "{{ c_temp_dir }}/{{ c_app_name }}"
