@@ -31,9 +31,9 @@
     recreate: yes
     force_kill: yes
     mounts:
-      source: "{{ c_temp_dir }}/{{ c_app_name }}"
-      target: "{{ c_build_path }}/target"
-      type: bind
-      read_only: no
+      - target: "{{ c_build_path }}/target"
+        source: "{{ c_temp_dir }}/{{ c_app_name }}"
+        type: bind
+        read_only: no
     network_mode: bridge
   notify: Fetch the app package
