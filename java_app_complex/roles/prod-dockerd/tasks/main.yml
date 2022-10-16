@@ -27,7 +27,7 @@
   docker_container:
     name: "{{ c_app_name }}_prod"
     image: "img_{{ c_app_name }}_prod"
-    state: present
+    state: started
     recreate: yes
     force_kill: yes
     init: yes
