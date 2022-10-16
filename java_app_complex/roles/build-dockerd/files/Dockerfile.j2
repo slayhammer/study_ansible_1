@@ -7,6 +7,7 @@ FROM ubuntu:20.04
 # Environment setup
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Moscow
+RUN mkdir /tmp/mount_point
 
 # Seting up all necessary software and further cache cleaning:
 #	'git'         - for cloning the sample java app from a rep
@@ -22,5 +23,5 @@ RUN git clone {{ c_app_repo }} {{ c_build_path }}
 # Building the app
 RUN mvn package -f {{ c_build_path }}
 
-# Set up volume
-VOLUME {{ c_build_path }}/target
+# Copying an artifact to binded volume
+CMD ["/bin/sh", "cp -f {{ c_build_path }}/target/{{ c_app_name }}.war {{ c_mount_point }}/{{ c_app_name }}.war"]

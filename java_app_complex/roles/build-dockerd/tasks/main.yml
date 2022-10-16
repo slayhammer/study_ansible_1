@@ -32,7 +32,7 @@
     force_kill: yes
     init: yes
     mounts:
-      - target: "{{ c_build_path }}/target"
+      - target: "{{ c_mount_point }}"
         source: "{{ c_temp_dir }}/{{ c_app_name }}"
         type: bind
         read_only: no

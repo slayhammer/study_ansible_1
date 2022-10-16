@@ -1,3 +1,4 @@
 ---
 c_app_repo: https://github.com/ashburnere/onlineshop-war.git
 c_build_path: /tmp/onlineshop-war
+c_mount_point: /tmp/mount_point
