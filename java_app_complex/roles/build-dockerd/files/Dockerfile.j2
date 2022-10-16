@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 	&& rm -rf /var/lib/apt/lists/*	
 
 # Fetching the sample java app src
-RUN git clone https://github.com/ashburnere/onlineshop-war.git /tmp/onlineshop-war
+RUN git clone {{ c_app_repo }} {{ c_build_path }}
 
 # Building the app
-RUN mvn package -f /tmp/onlineshop-war
+RUN mvn package -f {{ c_build_path }}

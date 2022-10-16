@@ -1,0 +1,34 @@
+---
+- name: Ensure a directory for an apt key exists
+  file:
+    path: "{{ c_apt_key_path }}/"
+    state: directory
+
+- name: Ensure an apt key for docker rep is present
+  apt_key:
+    url: "{{ c_docker_repo }}/gpg"
+    keyring: "{{ c_apt_key_path }}/docker.gpg"
+  
+- name: Ensure a docker repository is in reps list
+  apt_repository:
+    repo: "deb [arch=amd64 signed-by={{ c_apt_key_path }}/docker.gpg] {{ c_docker_repo }} focal stable"
+    state: present
+    filename: docker
+
+- name: Ensure docker and extra python packages are present
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+  with_items:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - python3-pip
+
+- name: Ensure docker module for Python is present
+  pip:
+    name: docker
+    state: present

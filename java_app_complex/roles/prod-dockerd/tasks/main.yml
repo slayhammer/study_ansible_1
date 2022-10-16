@@ -1,0 +1,26 @@
+---
+- name: Templating Dockerfile for prod image
+  template:
+    src: "{{ role_path }}/files/Dockerfile.j2"
+    dest: "{{ role_path }}/files/Dockerfile"
+
+- name: Ensure building docker image is built
+  docker_image:
+    name: "img_{{ c_app_name }}_prod"
+    source: build
+    path: "{{ role_path }}/files"
+    force_source: yes
+    state: present
+
+- name: Ensure building docker container is created and running
+  docker_container:
+    name: "{{ c_app_name }}_prod"
+    image: "img_{{ c_app_name }}_prod"
+    state: present
+    recreate: yes
+    force_kill: yes
+    exposed_ports:
+      - 8080
+    volumes:
+      - "{{ c_temp_dir }}:{{ c_tomcat_base }}/webapps:rw"
+  notify: Fetch the app package

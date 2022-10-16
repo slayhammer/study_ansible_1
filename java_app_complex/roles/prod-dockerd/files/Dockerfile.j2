@@ -7,7 +7,7 @@ FROM alpine:3.16.2
 
 # Environment setup
 ENV TZ=Europe/Moscow
-ENV CATALINA_BASE /var/lib/tomcat9
+ENV CATALINA_BASE {{ c_tomcat_base }}
 ENV CATALINA_HOME $CATALINA_BASE
 ENV PATH $CATALINA_HOME/bin:$CATALINA_BASE/bin:$PATH
 RUN mkdir $CATALINA_BASE

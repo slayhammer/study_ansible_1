@@ -14,6 +14,6 @@
   
 - name: Ensure the app package is installed
   synchronize:
-    src: "{{ c_temp_dir }}/{{ c_app_name }}"
-    dest: "{{ c_tomcat_webapps }}/{{ c_app_name }}"
+    src: "{{ c_temp_dir }}/{{ c_app_name }}.war"
+    dest: "{{ c_tomcat_webapps }}/{{ c_app_name }}.war"
     mode: push
