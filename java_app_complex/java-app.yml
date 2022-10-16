@@ -2,6 +2,10 @@
 # 'run_mode' variable MUST BE defined at INVENTORY level
 # and HAVE TO have a value either 'dockerd' (in case of docker mode)
 #                          or     some other, eg. 'hosted' (in case of hosted mode)
+#
+# The app available:
+# IN CASE OF HOSTED  MODE - at http://<your_address>:8080/onlineshop
+# IN CASE OF DOCKERD MODE - at http://<your_address>:8081/onlineshop
 - name: Building the app
   hosts: setup
   become: yes
