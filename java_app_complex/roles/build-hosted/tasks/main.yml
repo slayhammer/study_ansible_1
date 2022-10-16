@@ -19,4 +19,4 @@
 - name: Build app package (imperative)
   shell:
     cmd: "mvn package -q -f {{ c_build_path }}/"
-    notify: Fetch the app package
+  notify: Fetch the app package
