@@ -18,10 +18,10 @@
     force_source: yes
     state: present
 
-- name: Ensure a directory for mount point for docker volume exists
-  file:
-    path: "{{ c_temp_dir }}/{{ c_app_name }}"
-    state: directory
+#- name: Ensure a directory for mount point for docker volume exists
+#  file:
+#    path: "{{ c_temp_dir }}/{{ c_app_name }}"
+#    state: directory
 
 - name: Ensure building docker container is created and running
   docker_container:
