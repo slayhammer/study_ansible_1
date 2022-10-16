@@ -1,8 +1,13 @@
 ---
+- name: Ensure a directory for Dockerfile for building image exists
+  file:
+    path: "{{ c_temp_dir }}/docker/build"
+    state: directory
+
 - name: Templating Dockerfile for building image
   template:
     src: "{{ role_path }}/files/Dockerfile.j2"
-    dest: "{{ role_path }}/files/Dockerfile"
+    dest: "{{ c_temp_dir }}/docker/build/Dockerfile"
 
 - name: Ensure building docker image is built
   docker_image:
