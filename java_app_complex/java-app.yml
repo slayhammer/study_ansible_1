@@ -1,0 +1,20 @@
+---
+- name: Building the app
+  hosts: setup
+  become: yes
+  
+  roles:
+    - role: build-hosted
+      when: run_mode != 'dockerd'
+    - role: build-dockerd
+      when: run_mode == 'dockerd'
+
+- name: Deploying the app
+  hosts: prod
+  become: yes
+  
+  roles:
+    - role: prod-hosted
+      when: run_mode != 'dockerd'
+    - role: prod-dockerd
+      when: run_mode == 'dockerd'

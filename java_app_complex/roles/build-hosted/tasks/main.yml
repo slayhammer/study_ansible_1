@@ -1,0 +1,22 @@
+---
+- name: Ensure required building packages are present
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+  with_items:
+    - git
+    - maven
+
+- name: Ensure the package is built from the latest code in the repository
+  git:
+    dest: "{{ c_build_path }}"
+    repo: "{{ c_app_repo }}"
+    force: yes
+
+- name: Build app package (imperative)
+  shell:
+    cmd: "mvn package -q -f {{ c_build_path }}/"
+    notify: Fetch the app package

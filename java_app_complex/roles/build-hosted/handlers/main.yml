@@ -1,0 +1,6 @@
+---
+- name: Fetch the app package
+  synchronize:
+    src: "{{ c_build_path }}/target/{{ c_app_name }}"
+    dest: "{{ c_temp_dir }}/{{ c_app_name }}"
+    mode: pull
