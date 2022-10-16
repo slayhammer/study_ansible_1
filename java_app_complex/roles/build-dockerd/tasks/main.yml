@@ -26,5 +26,5 @@
     recreate: yes
     force_kill: yes
     volumes:
-      - "{{ c_temp_dir }}:{{ c_build_path }}:rw"
+      - "{{ c_temp_dir }}/{{ c_app_name }}:{{ c_build_path }}/target:rw"
   notify: Fetch the app package
