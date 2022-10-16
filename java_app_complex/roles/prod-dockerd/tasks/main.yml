@@ -30,7 +30,6 @@
     state: started
     recreate: yes
     force_kill: yes
-    init: yes
     mounts:
       - target: "{{ c_tomcat_base }}/webapps"
         source: "{{ c_temp_dir }}/{{ c_app_name }}"
