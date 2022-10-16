@@ -1,11 +1,13 @@
 ---
+# 'run_mode' variable MUST BE defined at INVENTORY level
+# and HAVE TO have a value either 'dockerd' (in case of docker mode)
+#                          or     some other, eg. 'hosted' (in case of hosted mode)
 - name: Building the app
   hosts: setup
   become: yes
-  
-  # 'run_mode' variable MUST BE defined at INVENTORY level
-  # and HAVE TO have a value either 'dockerd' (in case of docker mode)
-  #                          or     some other, eg. 'hosted' (in case of hosted mode)
+  vars_files:
+    - ./java-app-vars.yml
+
   roles:
     - role: build-hosted
       when: run_mode != 'dockerd'
@@ -15,7 +17,9 @@
 - name: Deploying the app
   hosts: prod
   become: yes
-  
+  vars_files:
+    - ./java-app-vars.yml
+ 
   roles:
     - role: prod-hosted
       when: run_mode != 'dockerd'

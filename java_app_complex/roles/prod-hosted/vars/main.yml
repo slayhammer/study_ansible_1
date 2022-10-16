@@ -1,6 +1,2 @@
 ---
-c_app_repo: https://github.com/ashburnere/onlineshop-war.git
-c_build_path: /tmp/onlineshop-war
 c_tomcat_webapps: /var/lib/tomcat9/webapps
-c_temp_dir: /tmp
-c_app_name: onlineshop.war
