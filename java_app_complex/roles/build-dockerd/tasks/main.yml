@@ -13,7 +13,8 @@
   docker_image:
     name: "img_{{ c_app_name }}_build"
     source: build
-    path: "{{ c_temp_dir }}/docker/build"
+    build:
+      path: "{{ c_temp_dir }}/docker/build"
     force_source: yes
     state: present
 
