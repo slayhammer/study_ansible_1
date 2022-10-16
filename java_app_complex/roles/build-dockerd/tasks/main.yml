@@ -27,9 +27,13 @@
   docker_container:
     name: "{{ c_app_name }}_build"
     image: "img_{{ c_app_name }}_build"
-    state: present
+    state: started
     recreate: yes
     force_kill: yes
-    volumes:
-      - "{{ c_temp_dir }}/{{ c_app_name }}:{{ c_build_path }}/target:rw"
+    mounts:
+      source: "{{ c_temp_dir }}/{{ c_app_name }}"
+      target: "{{ c_build_path }}/target"
+      type: bind
+      read_only: no
+    network_mode: bridge
   notify: Fetch the app package
