@@ -24,4 +24,4 @@ RUN git clone {{ c_app_repo }} {{ c_build_path }}
 RUN mvn package -f {{ c_build_path }}
 
 # Copying an artifact to binded volume
-CMD ["/bin/sh", "cp -f {{ c_build_path }}/target/{{ c_app_name }}.war {{ c_mount_point }}/{{ c_app_name }}.war"]
+CMD "cp -f {{ c_build_path }}/target/{{ c_app_name }}.war {{ c_mount_point }}/{{ c_app_name }}.war"
